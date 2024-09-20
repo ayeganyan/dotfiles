@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/ayeganyan'
+let g:netrw_dirhist_3='/Users/ayeganyan/tmp/object-resolver-service/nebulae'
+let g:netrw_dirhist_2='/Users/ayeganyan/workspace/devrealm/devenv-cli/.bitbucket'
+let g:netrw_dirhist_1='/private/var/folders/h0/618f5vj53gxc12bdn5nc1mvr0000gn/T/junit10588257757335296724'
+let g:netrw_dirhist_0='/Users/ayeganyan/workspace/sandbox/shepherd-streams'
+let g:netrw_dirhist_9='/Users/ayeganyan/workspace/innovation/hot-reload-poc/server/src/nebulae'
+let g:netrw_dirhist_8='/Users/ayeganyan/workspace/sandbox/localstack2.1.0/localstack-lambda'
+let g:netrw_dirhist_7='/Users/ayeganyan/workspace/loop-libraries/command/api/src/main/java/com/atlassian/loop/command/listener'
+let g:netrw_dirhist_6='/Users/ayeganyan/workspace/nebulae/ext/command/api/src/main/java/com/atlassian/nebulae/command/listener'
+let g:netrw_dirhist_5='/Users/ayeganyan/workspace/nebulae/ext/command/api/src/main/java/com/atlassian/nebulae/command'

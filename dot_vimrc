@@ -1,0 +1,194 @@
+"-----------------------------------"
+" Just reset everything to defaults "
+set nocompatible                  " use vim defaults
+
+"------------------"
+" Bugs workarounds "
+"------------------"
+let &t_Co=256
+set backspace=indent,eol,start    " fixes backspace issues
+
+"---------------------"
+" Gvim configurations "
+"---------------------"
+
+if has("gui_running")
+    set guifont=Monospace\ 14     " use this font
+    set lines=40                  " height = 50 lines
+    set columns=150               " width = 100 columns
+    "set guioptions-=m             " Remove menu bar
+    set guioptions-=T             " Remove toolbar
+    "set guioptions-=r             " Remove scrollbar
+endif
+colorscheme wombat
+"colorscheme materialtheme
+
+"----------------------"
+" Tabs->spaces section "
+"----------------------"
+
+set tabstop=4                     " numbers of spaces of tab character
+set shiftwidth=4                  " numbers of spaces to (auto)indent
+set scrolloff=0                   " keep lines when scrolling
+set expandtab                     " tabs are converted to spaces, use only when required
+
+"---------------------"
+" Indentation section "
+"---------------------"
+
+set autoindent                    " always set autoindenting on
+set smartindent                   " smart indent
+set cindent                       " cindent
+
+"---------------------------------"
+" Highlighting, searching section "
+"---------------------------------"
+
+syntax on                         " syntax highlighing
+set showmatch                     " highlight matching breckets
+set hlsearch                      " highlight searches
+set incsearch                     " do incremental searching
+set smartcase                    " smart case: change behaviour when capital letter is encountered
+set ignorecase                    " ignore case (combined with smart case)
+
+
+"hi Search       ctermbg=darkyellow ctermfg=NONE    " change search hl color
+hi MatchParen   ctermbg=darkgreen ctermfg=NONE       " change matching parentheses color
+
+hi LineNr       ctermbg=NONE ctermfg=darkgray  " change line numbers color
+
+hi StatusLine   ctermbg=NONE ctermfg=darkgray  " change status line color
+hi StatusLineNC ctermbg=NONE ctermfg=darkgray  " change non activestatus line color
+
+hi VertSplit    ctermbg=NONE ctermfg=darkgray  " change vertical split line color 
+
+hi Folded       ctermbg=NONE ctermfg=darkblue  " change folded line color
+hi FoldColumn   ctermbg=NONE ctermfg=darkblue  " change folded column color
+
+" highlight sourcecode lines longer than 100
+"au FileType cpp,c,java,pl,php,asp let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1) 
+
+"------------------------"
+" Environment components "
+"------------------------"
+
+set ls=2                          " always show status line
+set title                         " show title in console title bar
+set ruler                         " show the cursor position all the time
+set number                        " show line numbers
+set numberwidth=5                 " set line numbers column width
+set showcmd                       " display incomplete commands
+if has('mouse')
+  set mouse=a
+endif
+
+"---------------------"
+" Behavioural section "
+"---------------------"
+
+set ttyfast                       " smoother changes
+set nostartofline                 " don't jump to first character when paging
+set nobackup                      " do not keep a backup file
+"set autowrite                     " auto saves changes when quitting and swiching buffer
+"set nowrap                       " don't wrap lines
+set shortmess=atI                 " Abbreviate messages
+set modeline                      " last lines in document sets vim mode
+set modelines=3                   " number lines checked for modelines
+set whichwrap=b,s,h,l,<,>,[,]     " move freely between files
+
+"------------------"
+" Turning of bells "
+"------------------"
+
+set visualbell t_vb=              " turn off error beep/flash
+set novisualbell                  " turn off visual bell
+
+"------------------------"
+" Autocmd configurations "
+"------------------------"
+
+if has("autocmd")
+    " Restore cursor position
+    au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+    
+    " Filetypes (au = autocmd)
+    au FileType helpfile set nonumber      " no line numbers when viewing help
+    au FileType helpfile nnoremap <buffer><cr> <c-]>   " Enter selects subject
+    au FileType helpfile nnoremap <buffer><bs> <c-T>   " Backspace to go back
+    
+    " When using mutt, text width=72
+    au FileType mail,tex set textwidth=72
+    au FileType cpp,c,java,sh,pl,php,asp  set autoindent
+    au FileType cpp,c,java,sh,pl,php,asp  set smartindent
+    au FileType cpp,c,java,sh,pl,php,asp  set cindent
+    "au BufRead mutt*[0-9] set tw=72
+    
+    " Automatically chmod +x Shell and Perl scripts
+    au BufWritePost   *.sh             !chmod +x %
+
+    " File formats
+    au BufNewFile,BufRead  *.pls    set syntax=dosini
+    au BufNewFile,BufRead  *.skl    set syntax=skill
+    au BufNewFile,BufRead  modprobe.conf    set syntax=modconf
+endif
+
+"-------------------"
+" Keyboard mappings "
+"-------------------"
+
+" map F6 to open according header(.hpp) or source(cpp)
+map <F6> :e %:p:s,.hpp$,.X123X,:s,.cpp$,.hpp,:s,.X123X$,.cpp,<CR> 
+" map F5 to open according header(.h) or source(cpp)
+map <F5> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>     
+" map F4 to open according header(.h) or source (C)
+map <F4> :e %:p:s,.h$,.X123X,:s,.C$,.h,:s,.X123X$,.C,<CR>         
+
+" map F3 to open previous buffer
+map <F3> :cprevious<CR>                                           
+" map F2 to open next buffer
+map <F2> :cnext<CR>                                               
+
+" turn off highlighted search
+map <silent> <C-N> :silent noh<CR>                                
+" edit my .vimrc file in a split
+map ,v :sp ~/.vimrc<cr>                                           
+" edit my .vimrc file
+map ,e :e ~/.vimrc<cr>                                            
+" update the system settings from my vimrc file
+map ,u :source ~/.vimrc<cr>                                       
+" split tagbar window
+map ,t :TagbarToggle<cr>                                           
+" load cctree database
+map ,c :CCTreeLoadDB cscope.out<cr>                                           
+
+"----------------------"
+" Command line mapping "
+"----------------------"
+
+":cmap W w
+":cmap Q q
+
+"--------------"
+" Tags section "
+"--------------"
+
+set shortmess=at
+
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+set history=200
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
+set hidden
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'   " map %% as filepath without filename
+
+filetype plugin on
+runtime macros/matchit.vim
+
+compiler gcc
+set errorformat^=%-G%f:%l:\ warning:%m
+set tags=/home/vhovhann/build/sources/ic/lv/tags
