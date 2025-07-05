@@ -1,5 +1,10 @@
 #!/bin/zsh
 
+# Set aliases
+touch ~/.zprofile
+echo alias vim=nvim >> ~/.zprofile
+echo alias vim=nvim >> ~/.zprofile
+
 # Install sdkman
 curl -s "https://get.sdkman.io" | bash
 
@@ -11,7 +16,7 @@ zimfw install
 
 # Install useful utlities
 
-brew install lazygit lazydocker
+brew install lazygit lazydocker neovim
 
 brew install --cask iterm2 raycast
 
